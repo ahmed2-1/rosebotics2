@@ -183,18 +183,24 @@ class ArmAndClaw(object):
 
 
 class TouchSensor(rb.TouchSensor):
-    """ Primary author of this class:  PUT_YOUR_NAME_HERE. """
+    """ Primary author of this class:  Tom Ahmed. """
 
     def __init__(self, port=ev3.INPUT_1):
         super().__init__(port)
 
     def wait_until_pressed(self):
         """ Waits (doing nothing new) until the touch sensor is pressed. """
-        # TODO.
+        # DONE
+        while True:
+            if self.get_value() == 1:
+                break
 
     def wait_until_released(self):
         """ Waits (doing nothing new) until the touch sensor is released. """
-        # TODO
+        # DONE
+        while True:
+            if self.get_value() == 0:
+                break
 
 
 class Camera(object):
@@ -202,14 +208,14 @@ class Camera(object):
 
 
 class ColorSensor(rb.ColorSensor):
-    """ Primary author of this class:  PUT_YOUR_NAME_HERE. """
+    """ Primary author of this class:  Tom Ahmed. """
 
     def __init__(self, port=ev3.INPUT_3):
         super().__init__(port)
 
     def wait_until_intensity_is_less_than(self, reflected_light_intensity):
         """
-        Waits (doing nothing new) until the sensor's measurement of reflectedp
+        Waits (doing nothing new) until the sensor's measurement of reflected
         light intensity is less than the given value (threshold), which should
         be between 0 (no light reflected) and 100 (maximum light reflected).
         """
@@ -246,7 +252,7 @@ class ColorSensor(rb.ColorSensor):
         of what color it sees is any one of the given sequence of colors.
         Each item in the sequence must be a Color (as defined above).
         """
-        # TODO.
+        # DONE.
         while True:
             if self.get_color() in colors:
                 break
