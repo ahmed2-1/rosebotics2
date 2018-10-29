@@ -123,6 +123,21 @@ class DriveSystem(object):
                               degrees,
                               duty_cycle_percent=100,
                               stop_action=StopAction.BRAKE):
+        self.left_wheel.reset_degrees_spun()
+        if degrees > 0:
+            self.left_wheel.start_spinning(duty_cycle_percent)
+            self.right_wheel.start_spinning(-duty_cycle_percent)
+        else:
+            self.left_wheel.start_spinning(-duty_cycle_percent)
+            self.right_wheel.start_spinning(duty_cycle_percent)
+        while True:
+            if self.left_wheel.get_degrees_spun() >= (5.7 * degrees):
+                self.left_wheel.stop_spinning(stop_action)
+                self.right_wheel.stop_spinning(stop_action)
+                break
+
+
+
         """
         Spin in place (i.e., both wheels move, in opposite directions)
         the given number of degrees, at the given speed (-100 to 100,
@@ -136,15 +151,29 @@ class DriveSystem(object):
                      degrees,
                      duty_cycle_percent=100,
                      stop_action=StopAction.BRAKE):
+        self.left_wheel.reset_degrees_spun()
+        if degrees > 0:
+            self.left_wheel.start_spinning(duty_cycle_percent)
+            self.right_wheel.start_spinning(-duty_cycle_percent)
+        else:
+            self.left_wheel.start_spinning(-duty_cycle_percent)
+            self.right_wheel.start_spinning(duty_cycle_percent)
+        while True:
+            if self.left_wheel.get_degrees_spun() >= (5.7*degrees):
+                self.left_wheel.stop_spinning(stop_action)
+                self.right_wheel.stop_spinning(stop_action)
+                break
+
+
         """
         Turn (i.e., only one wheel moves)
         the given number of degrees, at the given speed (-100 to 100,
         where positive is clockwise and negative is counter-clockwise),
         stopping by using the given StopAction.
         """
-        # TODO: Do a few experiments to determine the constant that converts
-        # TODO:   from wheel-degrees-spun to robot-degrees-turned.
-        # TODO:   Assume that the conversion is linear with respect to speed.
+        # DONE: Do a few experiments to determine the constant that converts
+        # DONE:   from wheel-degrees-spun to robot-degrees-turned.
+        # DONE:   Assume that the conversion is linear with respect to speed.
 
 
 class ArmAndClaw(object):
