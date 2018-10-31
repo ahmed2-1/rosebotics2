@@ -59,9 +59,20 @@ def main():
         robot.touch_sensor.wait_until_released()
         robot.drive_system.stop_moving()
 
+    def follow_line():
+        robot.drive_system.start_moving(left_wheel_duty_cycle_percent=25, right_wheel_duty_cycle_percent=25)
+        while True:
+            robot.color_sensor.wait_until_intensity_is_greater_than(75)
+            robot.drive_system.stop_moving()
+            time.sleep(.5)
+            robot.drive_system.left_wheel.start_spinning(duty_cycle_percent=50)
+            robot.color_sensor.wait_until_intensity_is_less_than(25)
+            robot.drive_system.left_wheel.stop_spinning()
+            time.sleep(.5)
+            robot.drive_system.start_moving(left_wheel_duty_cycle_percent=25, right_wheel_duty_cycle_percent=25)
     robot = rb.Snatch3rRobot()
-    tests()
-
+    # tests()
+    follow_line()
 
 
 main()
