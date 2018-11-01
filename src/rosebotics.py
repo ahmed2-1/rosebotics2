@@ -189,7 +189,7 @@ class TouchSensor(low_level_rb.TouchSensor):
 
 
 class Camera(object):
-    """ Primary author of this class:  PUT_YOUR_NAME_HERE. """
+    """ Primary author of this class:  Tom Ahmed. """
 
 
 class ColorSensor(low_level_rb.ColorSensor):
