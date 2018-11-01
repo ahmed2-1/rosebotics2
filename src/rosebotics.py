@@ -233,7 +233,7 @@ class TouchSensor(rb.TouchSensor):
 
 
 class Camera(object):
-    """ Primary author of this class:  PUT_YOUR_NAME_HERE. """
+    """ Primary author of this class:  Tom Ahmed. """
 
 
 class ColorSensor(rb.ColorSensor):
@@ -295,6 +295,7 @@ class InfraredSensorAsProximitySensor(object):
 
 class InfraredSensorAsBeaconSensor(object):
     """ Primary author of this class:  PUT_YOUR_NAME_HERE. """
+
 
 class InfraredSensorAsBeaconButtonSensor(object):
     """ Primary author of this class:  PUT_YOUR_NAME_HERE. """
