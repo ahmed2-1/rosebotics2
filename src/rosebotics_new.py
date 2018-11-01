@@ -306,11 +306,19 @@ class TouchSensor(low_level_rb.TouchSensor):
 
     def wait_until_pressed(self):
         """ Waits (doing nothing new) until the touch sensor is pressed. """
-        # TODO.
+        # DONE
+        while True:
+            if self.is_pressed():
+                break
+
 
     def wait_until_released(self):
         """ Waits (doing nothing new) until the touch sensor is released. """
-        # TODO
+        # DONE
+        self.wait_until_pressed()
+        while True:
+            if not self.is_pressed():
+                break
 
 
 class ColorSensor(low_level_rb.ColorSensor):
@@ -696,9 +704,9 @@ class ArmAndClaw(object):
     """
     A class for the arm and its associated claw.
     Primary authors:  The ev3dev authors, David Mutchler, Dave Fisher,
-    their colleagues, the entire team, and PUT_YOUR_NAME_HERE.
+    their colleagues, the entire team, and Zachary Duncan.
     """
-    # TODO: In the above line, put the name of the primary author of this class.
+    # DONE: In the above line, put the name of the primary author of this class.
 
     def __init__(self, touch_sensor, port=ev3.OUTPUT_A):
         # The ArmAndClaw's  motor  is not really a Wheel, of course,
@@ -723,6 +731,11 @@ class ArmAndClaw(object):
         # TODO: Do this as STEP 2 of implementing this class.
 
     def raise_arm_and_close_claw(self):
+        while True:
+            self.motor(100)
+
+            break
+
         """
         Raise the arm (and hence close the claw), by making this ArmAndClaw
         object's motor start spinning at a reasonable speed (e.g. 100).
