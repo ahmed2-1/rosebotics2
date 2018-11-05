@@ -5,6 +5,7 @@
 
 import rosebotics as rb
 import time
+import ev3dev.ev3 as ev3
 
 
 def main():
@@ -70,9 +71,19 @@ def main():
             robot.drive_system.left_wheel.stop_spinning()
             time.sleep(.5)
             robot.drive_system.start_moving(left_wheel_duty_cycle_percent=25, right_wheel_duty_cycle_percent=25)
+
+    def find_blob():
+        blob1 = robot.camera.get_biggest_blob()
+        while True:
+            print(blob1.get_area())
+            if blob1.get_area() >= 600:
+                ev3.Sound.beep().wait()
+                break
+
     robot = rb.Snatch3rRobot()
     # tests()
-    follow_line()
+    # follow_line()
+    find_blob()
 
 
 main()
