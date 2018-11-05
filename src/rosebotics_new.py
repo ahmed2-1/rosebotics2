@@ -722,6 +722,8 @@ class ArmAndClaw(object):
         self.calibrate()
 
     def calibrate(self):
+        self.touch_sensor(100)
+        self.touch_sensor.wait_until_pressed()
         """
         Raise the arm at a reasonable speed until the touch sensor is pressed.
         Then lower the arm 14.2 revolutions (i.e., 14.2 * 360 degrees),
@@ -733,8 +735,9 @@ class ArmAndClaw(object):
     def raise_arm_and_close_claw(self):
         while True:
             self.motor(100)
-
+            self.TouchSensor.wait_until_pressed()
             break
+
 
         """
         Raise the arm (and hence close the claw), by making this ArmAndClaw
@@ -742,7 +745,7 @@ class ArmAndClaw(object):
         Positive speeds make the arm go UP; negative speeds make it go DOWN.
         Stop when the touch sensor is pressed.
         """
-        # TODO: Do this as STEP 1 of implementing this class.
+        # DONE: Do this as STEP 1 of implementing this class.
 
     def move_arm_to_position(self, position):
         """
