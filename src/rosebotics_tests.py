@@ -45,6 +45,7 @@ def run_test_ir():
         #    proximity_sensor
         #    beacon_sensor  NOT YET IMPLEMENTED
         #    beacon_button_sensor  NOT YET IMPLEMENTED
+
         print("Beacon sensor:",
               robot.beacon_sensor.get_heading_to_beacon(),
               robot.beacon_sensor.get_distance_to_beacon(),
