@@ -8,11 +8,13 @@ import time
 
 robot = rb.Snatch3rRobot()
 
+
 def polygon(n):
-    robot = rb.Snatch3rRobot()
     for k in range(n):
         robot.DriveSystem.go_straight_inches(6)
         robot.DriveSystem.turn_degrees((n-2)*(180/n))
+
+
 
 
 
@@ -29,7 +31,6 @@ def polygon(n):
 
 
 def main():
-    """ Runs YOUR specific part of the project """
 
 
 
