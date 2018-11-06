@@ -731,11 +731,11 @@ class ArmAndClaw(object):
         self.touch_sensor.wait_until_pressed()
         self.motor.stop_spinning()
         time.sleep(1)
-        turn_degrees = self.motor.get_degrees_spun()
+        # turn_degrees = self.motor.get_degrees_spun()
         self.motor.reset_degrees_spun()
         self.motor.start_spinning(-100)
         while True:
-            if self.motor.get_degrees_spun() == turn_degrees:
+            if self.motor.get_degrees_spun() <= -5112:
                 self.motor.stop_spinning()
                 break
 

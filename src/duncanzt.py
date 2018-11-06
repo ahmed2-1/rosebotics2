@@ -15,30 +15,7 @@ def polygon(n):
         robot.DriveSystem.turn_degrees((n-2)*(180/n))
 
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-def main():
-
-
-
-
-
-
-
-
-
-main()
 polygon(6)
+
+
+def arm_and_claw
