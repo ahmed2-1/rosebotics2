@@ -61,31 +61,29 @@ def main():
         robot.drive_system.stop_moving()
 
     def follow_line():
-        robot.drive_system.start_moving(left_wheel_duty_cycle_percent=25, right_wheel_duty_cycle_percent=25)
+        robot.drive_system.start_moving(left_wheel_duty_cycle_percent=50, right_wheel_duty_cycle_percent=50)
         while True:
             robot.color_sensor.wait_until_intensity_is_greater_than(75)
             robot.drive_system.stop_moving()
-            time.sleep(1)
-            # robot.drive_system.left_wheel.start_spinning(duty_cycle_percent=50)
-            # robot.color_sensor.wait_until_intensity_is_less_than(25)
-            # robot.drive_system.left_wheel.stop_spinning()
-            # time.sleep(.5)
-            robot.drive_system.turn_degrees(20, duty_cycle_percent=50)
-            time.sleep(1)
-            robot.drive_system.start_moving(left_wheel_duty_cycle_percent=25, right_wheel_duty_cycle_percent=25)
+            robot.drive_system.left_wheel.start_spinning(duty_cycle_percent=75)
+            robot.color_sensor.wait_until_intensity_is_less_than(25)
+            time.sleep(.6)
+            robot.drive_system.left_wheel.stop_spinning()
+            # robot.drive_system.turn_degrees(20, duty_cycle_percent=50)
+            robot.drive_system.start_moving(left_wheel_duty_cycle_percent=50, right_wheel_duty_cycle_percent=50)
 
     def find_blob():
         blob1 = robot.camera.get_biggest_blob()
         while True:
             print(blob1.get_area())
-            if blob1.get_area() >= 600:
-                ev3.Sound.beep().wait()
-                break
+            # if blob1.get_area() >= 600:
+            #     ev3.Sound.beep().wait()
+            #     break
 
     robot = rb.Snatch3rRobot()
     # tests()
-    follow_line()
-    # find_blob()
+    # follow_line()
+    find_blob()
 
 
 main()
