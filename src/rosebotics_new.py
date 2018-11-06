@@ -727,9 +727,12 @@ class ArmAndClaw(object):
         self.calibrate()
 
     def calibrate(self):
-        self.motor(100)
+        self.motor.start_spinning(100)
         self.touch_sensor.wait_until_pressed()
-        self.motor(-100)
+        self.motor.stop_spinning()
+        time.sleep(1)
+        self.motor.start_spinning(-100)
+        
         """
         Raise the arm at a reasonable speed until the touch sensor is pressed.
         Then lower the arm 14.2 revolutions (i.e., 14.2 * 360 degrees),
