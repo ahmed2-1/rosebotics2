@@ -743,7 +743,7 @@ class ArmAndClaw(object):
 
     def raise_arm_and_close_claw(self):
         while True:
-            self.motor(100)
+            self.motor.start_spinning(100)
             self.touch_sensor.wait_until_pressed()
             break
 

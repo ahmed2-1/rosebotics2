@@ -6,13 +6,15 @@
 import rosebotics_new as rb
 import time
 
+robot = rb.Snatch3rRobot()
+
 def polygon(n):
     robot = rb.Snatch3rRobot()
     for k in range(n):
         robot.DriveSystem.go_straight_inches(6)
         robot.DriveSystem.turn_degrees((n-2)*(180/n))
 
-robot = rb.Snatch3rRobot()
+
 
 
 
