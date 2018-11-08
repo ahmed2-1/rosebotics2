@@ -9,57 +9,64 @@ import ev3dev.ev3 as ev3
 
 
 def tests(robot):
-    test_go_straight_inches()
+    test_go_straight_inches(robot)
+    time.sleep(15)
+    test_wait_until_intensity_is_less_than(robot)
     time.sleep(2)
-    test_wait_until_intensity_is_less_than()
+    test_wait_until_intensity_is_greater_than(robot)
+    # time.sleep(2)
+    # test_wait_until_color_is(robot)
+    # time.sleep(2)
+    # test_wait_until_color_is_one_of(robot)
     time.sleep(2)
-    test_wait_until_intensity_is_greater_than()
+    test_wait_until_pressed(robot)
     time.sleep(2)
-    test_wait_until_color_is()
-    time.sleep(2)
-    test_wait_until_color_is_one_of()
-    time.sleep(2)
-    test_wait_until_pressed()
-    time.sleep(2)
-    test_wait_until_released()
+    test_wait_until_released(robot)
     robot.drive_system.stop_moving()
 
 
 def test_go_straight_inches(robot):
+    print("Testing go_straight_inches().")
     robot.drive_system.go_straight_inches(6)
 
 
 def test_wait_until_intensity_is_less_than(robot):
+    print('Testing wait_until_intensity_is_less_than().')
     robot.drive_system.start_moving(left_wheel_duty_cycle_percent=25, right_wheel_duty_cycle_percent=25)
     robot.color_sensor.wait_until_intensity_is_less_than(25)
     robot.drive_system.stop_moving()
 
 
 def test_wait_until_intensity_is_greater_than(robot):
+    print('Testing wait_until_intensity_is_greater_than().')
     robot.drive_system.start_moving(left_wheel_duty_cycle_percent=25, right_wheel_duty_cycle_percent=25)
     robot.color_sensor.wait_until_intensity_is_greater_than(75)
     robot.drive_system.stop_moving()
 
 
 def test_wait_until_color_is(robot, color):
+    print('Testing wait_until_color_is().')
     robot.drive_system.start_moving(left_wheel_duty_cycle_percent=25, right_wheel_duty_cycle_percent=25)
     robot.color_sensor.wait_until_color_is(color)
     robot.drive_system.stop_moving()
 
 
 def test_wait_until_color_is_one_of(robot):
+    print('Testing wait_until_color_is_one_of().')
     robot.drive_system.start_moving(left_wheel_duty_cycle_percent=25, right_wheel_duty_cycle_percent=25)
     robot.color_sensor.wait_until_color_is_one_of([2, 3, 4, 5])
     robot.drive_system.stop_moving()
 
 
 def test_wait_until_pressed(robot):
+    print('Testing wait_until_pressed().')
     robot.drive_system.start_moving(left_wheel_duty_cycle_percent=25, right_wheel_duty_cycle_percent=25)
     robot.touch_sensor.wait_until_pressed()
     robot.drive_system.stop_moving()
 
 
 def test_wait_until_released(robot):
+    print('Testing wait_until_released(). Please press touch sensor.')
     robot.touch_sensor.wait_until_pressed()
     robot.drive_system.start_moving(left_wheel_duty_cycle_percent=25, right_wheel_duty_cycle_percent=25)
     robot.touch_sensor.wait_until_released()
@@ -67,6 +74,7 @@ def test_wait_until_released(robot):
 
 
 def follow_line(robot):
+    print('Testing follow_line().')
     robot.drive_system.start_moving(left_wheel_duty_cycle_percent=50, right_wheel_duty_cycle_percent=50)
     while True:
         robot.color_sensor.wait_until_intensity_is_greater_than(75)
@@ -78,12 +86,11 @@ def follow_line(robot):
 
 
 def find_blob(robot):
+    print('Testing find_blob().')
     while True:
         blob1 = robot.camera.get_biggest_blob()
-        print(blob1.get_area())
-        # if blob1.get_area() >= 600:
-        #     ev3.Sound.beep().wait()
-        #     break
+        if blob1.get_area() >= 1500:
+            ev3.Sound.beep().wait()
 
 
 def main():
@@ -91,7 +98,11 @@ def main():
 
     robot = rb.Snatch3rRobot()
     # tests(robot)
-    follow_line(robot)
+    # time.sleep(2)
+    # follow_line(robot)
+    # time.sleep(10)
+    # robot.drive_system.stop_moving()
+    # time.sleep(2)
     find_blob(robot)
 
 

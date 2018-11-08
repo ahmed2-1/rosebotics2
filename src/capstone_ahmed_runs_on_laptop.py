@@ -25,6 +25,7 @@ Authors:  David Mutchler, his colleagues, and Tom Ahmed.
 
 import tkinter
 from tkinter import ttk
+from tkinter import *
 import mqtt_remote_method_calls as com
 
 
@@ -35,7 +36,8 @@ def main():
     mqtt_client = com.MqttClient()
     mqtt_client.connect_to_ev3()
 
-    setup_gui(root, mqtt_client)
+    # setup_drive_gui(root, mqtt_client)
+    setup_speak_gui(root, mqtt_client)
 
     root.mainloop()
     # --------------------------------------------------------------------------
@@ -43,7 +45,7 @@ def main():
     # --------------------------------------------------------------------------
 
 
-def setup_gui(root_window, mqtt):
+def setup_drive_gui(root_window, mqtt):
     """ Constructs and sets up widgets on the given window. """
     frame = ttk.Frame(root_window, padding=10)
     frame.grid()
@@ -56,6 +58,30 @@ def setup_gui(root_window, mqtt):
 
     go_forward_button['command'] = \
         lambda: handle_go_forward(speed_entry_box, mqtt)
+
+
+def setup_speak_gui(root_window, mqtt):
+    frame = ttk.Frame(root_window, padding=20)
+    frame.grid()
+
+    variable = StringVar(frame)
+    variable.set('line1')
+
+    line_list = ['line1', 'line2', 'line3']
+    lines_menu = ttk.OptionMenu(frame, variable, line_list[0], *line_list)
+    lines_menu.grid()
+
+    go_button = ttk.Button(frame, text='Start')
+    go_button.grid()
+
+    go_button['command'] = \
+        lambda: handle_start(variable, mqtt)
+
+
+def handle_start(var, mqtt):
+    line_to_robot = var.get()
+
+    mqtt.send_message('speak', line_to_robot)
 
 
 def handle_go_forward(entry_box, mqtt):
