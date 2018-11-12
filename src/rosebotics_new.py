@@ -225,6 +225,7 @@ class DriveSystem(object):
             if self.left_wheel.get_degrees_spun() >= inches * 87.67:
                 self.left_wheel.stop_spinning(stop_action=BRAKE)
                 self.right_wheel.stop_spinning(stop_action=BRAKE)
+                self.right_wheel.stop_spinning(stop_action=BRAKE)
                 break
 
     def spin_in_place_degrees(self,

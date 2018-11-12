@@ -34,6 +34,27 @@ class RemoteControlEtc(object):
     def speak(self, line_to_robot):
         ev3.Sound.speak(line_to_robot).wait()
 
+    def pickup(self):
+        """
+        :type robot: rb.Snatch3rRobot
+        :param robot:
+        """
+        self.robot.drive_system.right_wheel.start_spinning(50)
+        self.robot.drive_system.left_wheel.start_spinning(-50)
+        while True:
+            print(self.robot.camera.get_biggest_blob())
+            if self.robot.camera.get_biggest_blob().get_area() >= 500:
+                time.sleep(.45)
+                self.robot.drive_system.stop_moving()
+                break
+        distance = self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches()
+        print(self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches())
+        self.robot.drive_system.go_straight_inches(distance, 50)
+
+    def go_forward(self, speed):
+        speed = int(speed)
+        self.robot.drive_system.start_moving(speed, speed)
+
 
 def main():
     # --------------------------------------------------------------------------
@@ -58,10 +79,10 @@ def main():
         #
         # ----------------------------------------------------------------------
         time.sleep(0.01)  # For the delegate to do its work
-        # if robot.beacon_button_sensor.is_top_red_button_pressed():
-        #     ev3.Sound.beep()
-        # elif robot.beacon_button_sensor.is_top_blue_button_pressed():
-        #     ev3.Sound.speak('Hello. How are you?')
+        if robot.beacon_button_sensor.is_top_red_button_pressed():
+            ev3.Sound.beep()
+        elif robot.beacon_button_sensor.is_top_blue_button_pressed():
+            ev3.Sound.speak('Hello. How are you?')
 
 
 
