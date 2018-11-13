@@ -67,7 +67,13 @@ def setup_speak_gui(root_window, mqtt):
     variable = StringVar(frame)
     variable.set('line1')
 
-    line_list = ['line1', 'line2', 'line3']
+    line_list = ['Are you my appendix? Because I don’t understand how you work, but this feeling in my stomach makes me want to take you out',
+                 'On a scale from 1 to America, how free are you tonight?',
+                 'Can I follow you home? Cause my parents always told me to follow my dreams.',
+                 'How much does a polar bear weigh? Enough to break the ice.',
+                 "Are you the square root of -1? Cause you can't be real.",
+                 'Are you stairs? Because you took my breath away.',
+                 "Are you made of copper and tellurium? Because you're CuTe."]
     lines_menu = ttk.OptionMenu(frame, variable, line_list[0], *line_list)
     lines_menu.grid()
 
