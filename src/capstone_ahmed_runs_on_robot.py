@@ -34,7 +34,7 @@ class RemoteControlEtc(object):
     def speak(self, line_to_robot):
         ev3.Sound.speak(line_to_robot).wait()
 
-    def pickup(self):
+    def pickup(self, line_to_robot):
         """
         :type robot: rb.Snatch3rRobot
         :param robot:
@@ -42,14 +42,19 @@ class RemoteControlEtc(object):
         self.robot.drive_system.right_wheel.start_spinning(50)
         self.robot.drive_system.left_wheel.start_spinning(-50)
         while True:
-            print(self.robot.camera.get_biggest_blob())
             if self.robot.camera.get_biggest_blob().get_area() >= 500:
-                time.sleep(.45)
+                time.sleep(.55)
                 self.robot.drive_system.stop_moving()
+                self.robot.drive_system.left_wheel.reset_degrees_spun()
+                self.robot.drive_system.right_wheel.reset_degrees_spun()
                 break
-        distance = self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches()
-        print(self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches())
-        self.robot.drive_system.go_straight_inches(distance, 50)
+        while self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches() >= 5.5:
+            print(self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches())
+            self.robot.drive_system.start_moving(50, 50)
+        self.robot.drive_system.stop_moving()
+        self.robot.drive_system.go_straight_inches(2.5, 25)
+        ev3.Sound.speak(line_to_robot).wait()
+        self.robot.arm.calibrate()
 
     def go_forward(self, speed):
         speed = int(speed)

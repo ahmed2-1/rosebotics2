@@ -1,7 +1,7 @@
 """
   Capstone Project.
   This module contains high-level, general-purpose methods for a Snatch3r robot.
-
+x
   Team members:  Zachary Duncan, Tom Ahmed.
   Fall term, 2018-2019.
 """
@@ -133,8 +133,8 @@ class Snatch3rRobot(object):
         self.camera = Camera(camera_port)
 
         self.proximity_sensor = InfraredAsProximitySensor(ir_sensor_port)
-        self.beacon_sensor = InfraredAsBeaconSensor(channel=1)
-        self.beacon_button_sensor = InfraredAsBeaconButtonSensor(channel=1)
+        # self.beacon_sensor = InfraredAsBeaconSensor(channel=1)
+        # self.beacon_button_sensor = InfraredAsBeaconButtonSensor(channel=1)
 
         self.brick_button_sensor = BrickButtonSensor()
 
@@ -546,7 +546,7 @@ class InfraredAsProximitySensor(low_level_rb.InfraredSensor):
         is within its field of vision.
         """
         inches_per_cm = 2.54
-        return 70 * inches_per_cm * self.get_distance_to_nearest_object() / 100
+        return (70 / inches_per_cm) * self.get_distance_to_nearest_object() / 100
 
 
 class InfraredAsBeaconSensor(object):

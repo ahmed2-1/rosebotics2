@@ -81,7 +81,7 @@ def setup_speak_gui(root_window, mqtt):
 def handle_start(var, mqtt):
     line_to_robot = var.get()
 
-    mqtt.send_message('pickup', [])
+    mqtt.send_message('pickup', [line_to_robot])
 
 
 def handle_go_forward(entry_box, mqtt):

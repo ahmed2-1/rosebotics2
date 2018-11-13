@@ -93,6 +93,12 @@ def find_blob(robot):
             ev3.Sound.beep().wait()
 
 
+def test_proximity(robot):
+    while True:
+        print(robot.proximity_sensor.get_distance_to_nearest_object_in_inches())
+        time.sleep(.5)
+
+
 def main():
 
     """ Runs YOUR specific part of the project """
@@ -104,7 +110,8 @@ def main():
     # time.sleep(10)
     # robot.drive_system.stop_moving()
     # time.sleep(2)
-    find_blob(robot)
+    # find_blob(robot)
+    test_proximity(robot)
 
 
 main()
